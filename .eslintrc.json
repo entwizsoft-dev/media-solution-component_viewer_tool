@@ -1,0 +1,61 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "env": {
+        "node": true
+    },
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "next/core-web-vitals"
+    ],
+    "rules": {
+        "react/prop-types": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
+        ],
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-ts-ignore": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-floating-promises": "warn",
+        "@typescript-eslint/no-empty-function": "off",
+        "arrow-body-style": ["error", "always"],
+        "semi": ["error", "always"],
+        "comma-dangle": ["error", "always-multiline"],
+        "quotes": ["error", "single", { "avoidEscape": true }],
+        "indent": ["error",4],
+        // "max-len": [
+        //     "error",
+        //     {
+        //         "code": 180,
+        //         "ignoreUrls": true,
+        //         "ignoreStrings": true,
+        //         "ignoreTemplateLiterals": true
+        //     }
+        // ],
+        "sort-keys": "off",
+        "react/jsx-no-target-blank": "off",
+        "object-curly-newline": ["error", { "consistent": true }],
+        "no-shadow": ["error", { "hoist": "all" }],
+        "sort-vars": "off",
+        "react/jsx-closing-tag-location": [
+            "error",
+            {
+                "nonEmpty": "line-aligned",
+                "selfClosing": "line-aligned"
+            }
+        ],
+        "react/jsx-indent": ["error", 4, {"indentLogicalExpressions" : true}],
+        "react/jsx-indent-props": ["error", 4],
+        "nonblock-statement-body-position": ["error", "below"],
+        "curly": ["error", "all"],
+        "brace-style": ["error", "allman"],
+        "@next/next/no-img-element": "off"
+    }
+}

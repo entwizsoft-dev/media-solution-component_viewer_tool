@@ -1,0 +1,7 @@
+addReviewers: true
+addAssignees: author
+reviewers:
+  - shinahyun
+  - bdh407
+  - entwiz-jeong-hoi-seok
+numberOfReviewers: 3

@@ -1,2 +1,3 @@
-# media-solution-component_viewer_tool
-미디어 솔루션 컴포넌트 확인 레포
+# 미디어 솔루션 컴포넌트 뷰어 레포
+미디어 솔루션 컴포넌트 팔레트를 확인 및 개발 할 수 있는 레포입니다.
+개발이 완료되면 component admin에 업로드 해주세요!

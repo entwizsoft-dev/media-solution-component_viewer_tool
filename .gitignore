@@ -40,4 +40,4 @@ next-env.d.ts
 .sentryclirc
 
 # export file
-/src/export
+src/export/*

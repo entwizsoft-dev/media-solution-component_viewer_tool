@@ -38,6 +38,3 @@ next-env.d.ts
 
 # Sentry Auth Token
 .sentryclirc
-
-# export file
-src/export/*

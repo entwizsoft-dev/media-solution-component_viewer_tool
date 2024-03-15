@@ -34,8 +34,9 @@ export const getServerSideProps = async () =>
 {
     try 
     {
-        console.log('트리거');
-        const res = await axios.get('http://localhost:3005/api/exportOption');
+        //code export
+        await axios.get('http://localhost:3005/api/exportOption');
+        
         return { props: {} };
     }
     catch (error) 

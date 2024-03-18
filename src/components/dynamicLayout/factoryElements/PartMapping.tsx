@@ -78,7 +78,21 @@ const PartMapping: React.FC<IPartMappingProps> = (props) =>
         {
             const callback = (prev: ILayoutCoreDataObjectProps) => 
             {
-                const convres = currentLayoutData.state?.contents?.reduce((a,c) => 
+                const testRes = [
+                    {
+                        _id: '65cf1472ade16310a0de204a',
+                        testImage: [
+                            'https://d21ageesh0dquz.cloudfront.net/images/1708070000758-5575__1699525286073-3036.ddo.png',
+                        ],
+                        testText: '테스트 글자',
+                        testNumber: 9999,
+                        _templateName: 'test',
+                        createdAt: '2024-02-16 16:53:22',
+                        updatedAt: '2024-02-16 16:53:22',
+                    },
+                ];
+
+                const convres = testRes.reduce((a,c) => 
                 {
                     const json = {
                         options: currentLayoutData.state?.itemOptions,

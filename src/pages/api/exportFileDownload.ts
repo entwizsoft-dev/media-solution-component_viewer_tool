@@ -17,8 +17,6 @@ const exportHandler = (req: NextApiRequest, res: NextApiResponse) =>
         res.setHeader('Content-Disposition', 'attachment; filename=ExportFile.tsx');
         res.setHeader('Content-Length', fileSize);
 
-
-        // res.status(200).json({ data: '코드 파일 저장' });
         fileStream.pipe(res);
     }
     else 

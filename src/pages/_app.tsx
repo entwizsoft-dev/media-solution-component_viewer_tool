@@ -33,7 +33,7 @@ const MyApp = ({
     return (
         <CacheProvider value={emotionCache}>
             <MetaTag
-                title={'Component Viewer'}
+                title={'Component Viewer Tool'}
             />
             <ThemeProvider theme={createMyTheme(false)}>
                 <CssBaseline />

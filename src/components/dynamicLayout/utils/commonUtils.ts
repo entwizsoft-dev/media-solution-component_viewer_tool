@@ -12,7 +12,7 @@ export const findOption = <T = any>(option: ILayoutElementOptionProps<T>[] | und
         {
             const findObj = option?.find(op => 
             {
-                return op.key === matchKey;
+                return op?.key === matchKey;
             });
 
             //숨겨져 있을 경우 없는 값으로 판단

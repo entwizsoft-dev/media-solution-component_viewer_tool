@@ -39,13 +39,12 @@ const DYElementItemOptionList: React.FC = () =>
             currentLayoutData.setState(prev => 
             {
                 const newprev = {...prev};
-                let currentData = newprev.contents;
                 if (
-                    Array.isArray(currentData) &&
-                    currentData.length > 0
+                    Array.isArray(newprev.contents) &&
+                    newprev.contents.length > 0
                 ) 
                 {
-                    const resData = currentData.map((dd, ii) => 
+                    const resData = newprev.contents.map((dd, ii) => 
                     {
                         if(ii === itemIdx)
                         {
@@ -55,7 +54,7 @@ const DYElementItemOptionList: React.FC = () =>
                         return dd;
                     });
 
-                    currentData = resData;
+                    newprev.contents = resData;
                 }
 
                 return newprev;

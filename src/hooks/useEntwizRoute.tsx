@@ -12,7 +12,7 @@ const useEntwizRoute = () =>
     const router = useRouter();
     const push = (type: string, option: IEntwizRouterProps) => 
     {
-        if(process.env.NEXT_PUBLIC_USE_WEB_EVENT === 'able')
+        if(true)
         {
             if(type === 'externalLink')
             {

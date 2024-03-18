@@ -10,9 +10,6 @@ import '@/styles/datepicker.css';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createMyTheme } from '@/styles/theme';
-//redux
-import { Provider } from 'react-redux';
-import store from '../store';
 //time
 import 'moment-timezone';
 //components
@@ -35,19 +32,15 @@ const MyApp = ({
 
     return (
         <CacheProvider value={emotionCache}>
-            <Provider
-                store={store}
-            >
-                <MetaTag
-                    title={'Component Viewer'}
-                />
-                <ThemeProvider theme={createMyTheme(false)}>
-                    <CssBaseline />
-                    <CommonLayout>
-                        <Component {...pageProps} />
-                    </CommonLayout>
-                </ThemeProvider>
-            </Provider>
+            <MetaTag
+                title={'Component Viewer'}
+            />
+            <ThemeProvider theme={createMyTheme(false)}>
+                <CssBaseline />
+                <CommonLayout>
+                    <Component {...pageProps} />
+                </CommonLayout>
+            </ThemeProvider>
         </CacheProvider>
     );
 };

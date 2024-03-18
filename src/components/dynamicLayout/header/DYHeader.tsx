@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
-//context
-import { useDYLayoutContext } from '../DYLayoutContext';
+import downloadFile from '@/utils/downloadFile';
 //components
 import {
     Box,
@@ -9,18 +8,10 @@ import {
     Typography,
     ButtonGroup,
     Button,
-    Popover,
 } from '@mui/material';
-import DTHeaderPopover from '@/components/datatemplate/header/DTHeaderPopover';
 
 const DYHeader: React.FC = () => 
 {
-    //context
-    const {
-        
-    } = useDYLayoutContext();
-    //state
-    const [debugEl, setDebugEl] = useState<HTMLButtonElement | null>(null); //디버그 메뉴
 
     return (
         <>
@@ -34,12 +25,19 @@ const DYHeader: React.FC = () =>
                         color='info'
                     >
                         <ControlIcon
-                            onClick={(e) => 
+                            onClick={async () => 
                             {
-                                setDebugEl(e.currentTarget);
+                                try 
+                                {
+                                    await downloadFile('/api/exportFileDownload');
+                                }
+                                catch (error) 
+                                {
+                                    
+                                }
                             }}
                         >
-                            <Typography variant='button'>디버깅</Typography>
+                            <Typography variant='button'>파일 저장</Typography>
                         </ControlIcon>
                     </LeftControlGtoup>
                 </LeftControlBox>
@@ -52,76 +50,8 @@ const DYHeader: React.FC = () =>
                         </Title>
                     </TitleBox>
                 </TitleWrap>
-                <RightControlBox>
-
-                </RightControlBox>
+                <RightControlBox/>
             </Head>
-            {/* 디버그 팝오버 */}
-            <Popover
-                id='debugPopover'
-                open={Boolean(debugEl)}
-                anchorEl={debugEl}
-                onClose={() => 
-                {
-                    setDebugEl(null);
-                }}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-            >
-                <DTHeaderPopover
-                    close={() => 
-                    {
-                        setDebugEl(null);
-                    }}
-                    listData={[
-                        {
-                            list: [
-                                {
-                                    label: '기본 선언 규약',
-                                    event: () => 
-                                    {
-                                        
-                                    },
-                                },
-                                {
-                                    label: 'Import',
-                                    event: () => 
-                                    {
-                                        
-                                    },
-                                },
-                            ],
-                        },
-                        {
-                            list: [
-                                {
-                                    label: 'Option',
-                                    event: () => 
-                                    {
-                                        
-                                    },
-                                },
-                                {
-                                    label: 'Item Option',
-                                    event: () => 
-                                    {
-                                        
-                                    },
-                                },
-                                {
-                                    label: 'BridgeKey',
-                                    event: () => 
-                                    {
-                                        
-                                    },
-                                },
-                            ],
-                        },
-                    ]}
-                />
-            </Popover>
         </>
     );
 };

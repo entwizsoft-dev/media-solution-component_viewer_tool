@@ -1,9 +1,0 @@
-export { Text } from './Text';
-export { Number } from './Number';
-export { Radio } from './Radio';
-export { RangeSlider } from './RangeSlider';
-export { SelectBox } from './SelectBox';
-export { Selection } from './Selection';
-export { Switch } from './Switch';
-export { DatePicker } from './DatePicker';
-export { TemplateSelectBox } from './TemplateSelectBox';

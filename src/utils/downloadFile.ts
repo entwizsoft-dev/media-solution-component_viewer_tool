@@ -1,4 +1,4 @@
-import axiosGuard from './axiosGuard';
+import axios from 'axios';
 //type
 import {
     AxiosResponse,
@@ -17,7 +17,7 @@ const downloadFile: IDownLoadFileFcnProps = async (url, json) =>
             throw 'donwload url not valid';
         }
 
-        const res: AxiosResponse<BlobPart> = await axiosGuard.get(url, {
+        const res: AxiosResponse<BlobPart> = await axios.get(url, {
             params: json,
             responseType: 'blob',
         });

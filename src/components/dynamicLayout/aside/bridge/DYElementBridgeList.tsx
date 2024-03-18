@@ -43,46 +43,9 @@ const DYElementBridgeList: React.FC = () =>
     } = useDYLayoutContext();
     //index
     const elementIdx = focusIndex.state.element;
-    const elementType = focusIndex.state.type;
     //bridge options
 
-    const bridge = (() => 
-    {
-        let result;
-        if(elementType === 'layout')
-        {
-            if(elementIdx !== null)
-            {
-                result = layoutData.state[elementIdx]?.contentBridgeKey;
-            }
-        }
-        else if(elementType === 'header')
-        {
-            if(headerData.state.values.hasOwnProperty(layoutId))
-            {
-                result = headerData.state.values?.[layoutId]?.contentBridgeKey;
-            }
-            else if(headerData.state.defaultKeyName && headerData.state.values.hasOwnProperty(headerData.state.defaultKeyName))
-            {
-                result = headerData.state.values?.[headerData.state.defaultKeyName]?.contentBridgeKey;
-            }
-        }
-        else if(elementType === 'footer')
-        {
-            if(footerData.state.values.hasOwnProperty(layoutId))
-            {
-                result = footerData.state.values?.[layoutId]?.contentBridgeKey;
-            }
-            else if(footerData.state.defaultKeyName && footerData.state.values.hasOwnProperty(footerData.state.defaultKeyName))
-            {
-                result = footerData.state.values?.[footerData.state.defaultKeyName]?.contentBridgeKey;
-            }
-        }
-
-        return result;
-    })();
-
-    const bridgeArr = convertToArr(bridge);
+    const bridgeArr = convertToArr(currentLayoutData.state?.contentBridgeKey);
 
     return (
         <Area>
@@ -110,73 +73,19 @@ const DYElementBridgeList: React.FC = () =>
                                             {
                                                 const v = e.currentTarget.value;
 
-                                                if(elementType === 'header')
+                                                currentLayoutData.setState(prev => 
                                                 {
-                                                    headerData.setState(prev => 
+                                                    const newprev = {...prev};
+
+                                                    const ork = newprev.contentBridgeKey?.[d.originkey];
+
+                                                    if(ork)
                                                     {
-                                                        const newprev = {...prev};
+                                                        ork.value = v;
+                                                    }
 
-                                                        let ork;
-
-                                                        if(newprev.values.hasOwnProperty(layoutId))
-                                                        {
-                                                            ork = newprev.values[layoutId].contentBridgeKey?.[d.originkey];
-                                                        }
-                                                        else if(newprev.defaultKeyName && newprev.values.hasOwnProperty(newprev.defaultKeyName))
-                                                        {
-                                                            ork = newprev.values[newprev.defaultKeyName].contentBridgeKey?.[d.originkey];
-                                                        }
-
-                                                        if(ork)
-                                                        {
-                                                            ork.value = v;
-                                                        }
-                                                        return newprev;
-                                                    });
-                                                }
-                                                else if(elementType === 'footer')
-                                                {
-                                                    footerData.setState(prev => 
-                                                    {
-                                                        const newprev = {...prev};
-    
-                                                        let ork;
-
-                                                        if(newprev.values.hasOwnProperty(layoutId))
-                                                        {
-                                                            ork = newprev.values[layoutId].contentBridgeKey?.[d.originkey];
-                                                        }
-                                                        else if(newprev.defaultKeyName && newprev.values.hasOwnProperty(newprev.defaultKeyName))
-                                                        {
-                                                            ork = newprev.values[newprev.defaultKeyName].contentBridgeKey?.[d.originkey];
-                                                        }
-
-                                                        if(ork)
-                                                        {
-                                                            ork.value = v;
-                                                        }
-                                                        return newprev;
-                                                    });
-                                                }
-                                                else if(elementType === 'layout')
-                                                {
-                                                    layoutData.setState(prev => 
-                                                    {
-                                                        const res = prev.map((ld,li) => 
-                                                        {
-                                                            if(li === elementIdx)
-                                                            {
-                                                                const ork = ld.contentBridgeKey?.[d.originkey];
-                                                                if(ork)
-                                                                {
-                                                                    ork.value = v;
-                                                                }
-                                                            }
-                                                            return ld;
-                                                        });
-                                                        return res;
-                                                    });
-                                                }
+                                                    return newprev;
+                                                });
                                             }}
                                         />
                                     </ListItem>

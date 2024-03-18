@@ -2,9 +2,9 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 //type
 import { IMappingValueProps } from '../PartMapping';
-import { ISelectionItemDataProps } from '@/components/datatemplate/interface/element.interface';
+// import { ISelectionItemDataProps } from '@/components/datatemplate/interface/element.interface';
 //utils
-import { dedupe } from '@/components/datatemplate/utils/dedupe';
+import { dedupe } from '@/components/dynamicLayout/utils/dedupe';
 import { bindAction } from '../../utils/bindAction';
 //components
 import {
@@ -15,7 +15,7 @@ import {
     RadioGroup,
 } from '@mui/material';
 
-export const Radio: React.FC<IMappingValueProps<ISelectionItemDataProps[]>> = (props) => 
+export const Radio: React.FC<IMappingValueProps<any[]>> = (props) => 
 {
     const {
         data,
@@ -44,7 +44,7 @@ export const Radio: React.FC<IMappingValueProps<ISelectionItemDataProps[]>> = (p
                         {
                             if (d.key !== undefined && d.key === key) 
                             {
-                                const res = d.value?.map((dd: ISelectionItemDataProps) => 
+                                const res = d.value?.map((dd: any) => 
                                 {
                                     const json = {
                                         ...dd,

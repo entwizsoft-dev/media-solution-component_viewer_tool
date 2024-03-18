@@ -8,6 +8,10 @@ import {
     IFocuseIndexPoprs,
     ILayoutCoreDataObjectProps,
 } from './interface/layout.interface';
+import {
+    IContentBridgeKeyProps,
+    ILayoutElementOptionProps,
+} from './interface/element.interface';
 //context
 import { DYLayoutProvider } from './DYLayoutContext';
 //components
@@ -19,8 +23,19 @@ import DYHeader from './header/DYHeader';
 import DYAside from './aside/DYAside';
 import DYBoard from '@/components/dynamicLayout/body/DYBoard';
 
-const DYLayout: React.FC = () => 
+interface IDYLayoutProps {
+    defaultOption?: ILayoutElementOptionProps[];
+    defaultItemOption?: ILayoutElementOptionProps[];
+    defaultBridgeKey?: IContentBridgeKeyProps
+}
+
+const DYLayout: React.FC<IDYLayoutProps> = (props) => 
 {
+    const {
+        defaultOption,
+        defaultItemOption,
+        defaultBridgeKey,
+    } = props;
     //state
     const [asideWidth] = useState<number>(360); // aside 상태창 width (*useState 필요시에만 선언)
     const [asideState, setAsideState] = useState<boolean>(true); // aside 상태창 state
@@ -33,6 +48,9 @@ const DYLayout: React.FC = () =>
     //layout state
     const [currentLayoutData, setCurrentLayoutData] = useState<ILayoutCoreDataObjectProps>({
         type: 'testComponent',
+        options: defaultOption ? defaultOption : [],
+        itemOptions: defaultItemOption ? defaultItemOption : [],
+        contentBridgeKey: defaultBridgeKey ? defaultBridgeKey : {},
     }); //컴포넌트 데이터 배열
 
     return (

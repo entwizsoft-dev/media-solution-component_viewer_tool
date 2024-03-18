@@ -17,146 +17,63 @@ const DYElementOptionList: React.FC = () =>
 {
     //context
     const {
-        layoutData,
-        headerData,
-        footerData,
         focusIndex,
+        currentLayoutData,
     } = useDYLayoutContext();
     //index
     const elementIdx = focusIndex.state.element;
-    const elementType = focusIndex.state.type;
-    //options
-    const elementsOptionArray = (() => 
-    {
-        let result;
-        if(elementType === 'layout')
-        {
-            if(elementIdx !== null)
-            {
-                result = layoutData.state[elementIdx]?.options;
-            }
-        }
-        else if(elementType === 'header')
-        {
-            if(headerData.state.values.hasOwnProperty(layoutId))
-            {
-                result = headerData.state.values?.[layoutId]?.options;
-            }
-            else if(headerData.state.defaultKeyName && headerData.state.values.hasOwnProperty(headerData.state.defaultKeyName))
-            {
-                result = headerData.state.values?.[headerData.state.defaultKeyName]?.options;
-            }
-        }
-        else if(elementType === 'footer')
-        {
-            if(footerData.state.values.hasOwnProperty(layoutId))
-            {
-                result = footerData.state.values?.[layoutId]?.options;
-            }
-            else if(footerData.state.defaultKeyName && footerData.state.values.hasOwnProperty(footerData.state.defaultKeyName))
-            {
-                result = footerData.state.values?.[footerData.state.defaultKeyName]?.options;
-            }
-        }
+    const cuurentOption = currentLayoutData.state?.options;
 
-        return result;
-    })();
-
-    //option update
+    // option update
     const currentItemUpdate: ILayoutOptionCallbackProps = (result) => 
     {
-        if(elementType === 'header')
+        currentLayoutData.setState(prev => 
         {
-            headerData.setState(prev => 
-            {
-                const newprev = {...prev};
-                if(newprev.values.hasOwnProperty(layoutId))
-                {
-                    newprev.values[layoutId].options = result;
-                }
-                else if(newprev.defaultKeyName && newprev.values.hasOwnProperty(newprev.defaultKeyName))
-                {
-                    newprev.values[newprev.defaultKeyName].options = result;
-                }
-                return newprev;
-            });
-        }
-        else if(elementType === 'footer')
-        {
-            footerData.setState(prev => 
-            {
-                const newprev = {...prev};
-                if(newprev.values.hasOwnProperty(layoutId))
-                {
-                    newprev.values[layoutId].options = result;
-                }
-                else if(newprev.defaultKeyName && newprev.values.hasOwnProperty(newprev.defaultKeyName))
-                {
-                    newprev.values[newprev.defaultKeyName].options = result;
-                }
-                return newprev;
-            });
-        }
-        else if(elementType === 'layout')
-        {
-            if (typeof elementIdx === 'number') 
-            {
-                layoutData.setState(prev => 
-                {
-                    const newarr = [...prev];
-        
-                    if (newarr[elementIdx] && newarr[elementIdx].options) 
-                    {
-                        newarr[elementIdx] = {
-                            ...newarr[elementIdx],
-                            options: result,
-                        };
-                    }
-    
-                    return newarr;
-                });
-            }
-        }
+            const newprev = {...prev};
+            newprev.options = result;
+
+            return newprev;
+        });
     };
 
     return (
         <Area>
             {
-                // (
-                //     Array.isArray(elementsOptionArray) &&
-                //     elementsOptionArray.length > 0 &&
-                //     typeof elementIdx === 'number'
-                // ) ?
-                //     <List>
-                //         {
-                //             elementsOptionArray.map((d,i) => 
-                //             {
-                //                 return (
-                //                     <PartMapping
-                //                         key={i}
-                //                         data={d}
-                //                         currentLayout={{
-                //                             state: elementsOptionArray,
-                //                             setState: (callback) => 
-                //                             {
-                //                                 if(typeof callback === 'function')
-                //                                 {
-                //                                     if(elementsOptionArray)
-                //                                     {
-                //                                         currentItemUpdate(callback(elementsOptionArray, i));
-                //                                     }
-                //                                 }
-                //                             },
-                //                         }}
-                //                     />
-                //                 );
-                //             })
-                //         }
-                //     </List>
-                //     :
-                <Empty>
-                    Options Empty
-                </Empty>
+                (
+                    Array.isArray(cuurentOption) &&
+                    cuurentOption.length > 0 &&
+                    typeof elementIdx === 'number'
+                ) ?
+                    <List>
+                        {
+                            cuurentOption.map((d,i) => 
+                            {
+                                return (
+                                    <PartMapping
+                                        key={i}
+                                        data={d}
+                                        currentLayout={{
+                                            state: cuurentOption,
+                                            setState: (callback) => 
+                                            {
+                                                if(typeof callback === 'function')
+                                                {
+                                                    if(cuurentOption)
+                                                    {
+                                                        currentItemUpdate(callback(cuurentOption, i));
+                                                    }
+                                                }
+                                            },
+                                        }}
+                                    />
+                                );
+                            })
+                        }
+                    </List>
+                    :
+                    <Empty>
+                        Options Empty
+                    </Empty>
             }
         </Area>
     );

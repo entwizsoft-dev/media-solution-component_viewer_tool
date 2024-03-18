@@ -27,10 +27,7 @@ const DYElementItemOptionList: React.FC = () =>
     //context
     const {
         focusIndex,
-        layoutId,
-        layoutData,
-        footerData,
-        headerData,
+        currentLayoutData,
     } = useDYLayoutContext();
     //index
     const {
@@ -43,95 +40,83 @@ const DYElementItemOptionList: React.FC = () =>
     if(focusType === 'layout')
     {
         // //options
-        // const elementItemOptionArray = (elementIdx !== null && itemIdx !== null) ? layoutData.state[elementIdx]?.contents?.[itemIdx]?.options : undefined;
+        const elementItemOptionArray = itemIdx !== null ? currentLayoutData.state?.contents?.[itemIdx]?.options : undefined;
 
-        // //현재 선택된 레이아웃 아이템 업데이트
-        // const currentItemUpdate: ILayoutOptionCallbackProps = (result) => 
-        // {
-        //     if(
-        //         typeof elementIdx === 'number' &&
-        //     typeof itemIdx === 'number'
-        //     )
-        //     {
-        //         layoutData.setState(prev => 
-        //         {
-        //             const newarr = prev.map((d,i) => 
-        //             {
-                            
-        //                 if(i === elementIdx)
-        //                 {
-        //                     const currentData = d.contents;
-        //                     if (
-        //                         Array.isArray(currentData) &&
-        //                     currentData.length > 0
-        //                     ) 
-        //                     {
-        //                         const resData = currentData.map((dd, ii) => 
-        //                         {
-        //                             if(ii === itemIdx)
-        //                             {
-        //                                 return {...dd, options: result};
-        //                             }
+        //현재 선택된 레이아웃 아이템 업데이트
+        const currentItemUpdate: ILayoutOptionCallbackProps = (result) => 
+        {
+            if(typeof itemIdx === 'number')
+            {
+                currentLayoutData.setState(prev => 
+                {
+                    const currentData = prev.contents;
+                    if (
+                        Array.isArray(currentData) &&
+                        currentData.length > 0
+                    ) 
+                    {
+                        const resData = currentData.map((dd, ii) => 
+                        {
+                            if(ii === itemIdx)
+                            {
+                                return {...dd, options: result};
+                            }
 
-        //                             return dd;
-        //                         });
+                            return dd;
+                        });
 
-        //                         return {...d, contents: resData};
-        //                     }
-        //                 }
+                        return {...currentData, contents: resData};
+                    }
 
-        //                 return d;
-        //             });
-            
-        //             return newarr;
-        //         });
-        //     }
-        // };
+                    return prev;
+                });
+            }
+        };
 
         return (
             <Area>
                 {
-                    // (
-                    //     Array.isArray(elementItemOptionArray) &&
-                    //     elementItemOptionArray.length > 0 &&
-                    //     typeof elementIdx === 'number' &&
-                    //     typeof itemIdx === 'number'
-                    // ) ?
-                    //     <List>
-                    //         {
-                    //             elementItemOptionArray.map((d,i) => 
-                    //             {
-                    //                 return (
-                    //                     <PartMapping
-                    //                         key={i}
-                    //                         data={d}
-                    //                         currentLayout={{
-                    //                             setState: (callback) => 
-                    //                             {
-                    //                                 const currentData = layoutData.state[elementIdx].contents;
-                    //                                 if(
-                    //                                     typeof callback === 'function' &&
-                    //                                     Array.isArray(currentData) &&
-                    //                                     currentData.length > 0
-                    //                                 )
-                    //                                 {
-                    //                                     const currentDataOption = currentData[itemIdx].options;
-                    //                                     if(currentDataOption)
-                    //                                     {
-                    //                                         currentItemUpdate(callback(currentDataOption, i));
-                    //                                     }
-                    //                                 }
-                    //                             },
-                    //                         }}
-                    //                     />
-                    //                 );
-                    //             })
-                    //         }
-                    //     </List>
-                    //     :
-                    <Empty>
-                        Item Options Empty
-                    </Empty>
+                    (
+                        Array.isArray(elementItemOptionArray) &&
+                        elementItemOptionArray.length > 0 &&
+                        typeof elementIdx === 'number' &&
+                        typeof itemIdx === 'number'
+                    ) ?
+                        <List>
+                            {
+                                elementItemOptionArray.map((d,i) => 
+                                {
+                                    return (
+                                        <PartMapping
+                                            key={i}
+                                            data={d}
+                                            currentLayout={{
+                                                setState: (callback) => 
+                                                {
+                                                    const currentData = currentLayoutData.state.contents;
+                                                    if(
+                                                        typeof callback === 'function' &&
+                                                        Array.isArray(currentData) &&
+                                                        currentData.length > 0
+                                                    )
+                                                    {
+                                                        const currentDataOption = currentData[itemIdx].options;
+                                                        if(currentDataOption)
+                                                        {
+                                                            currentItemUpdate(callback(currentDataOption, i));
+                                                        }
+                                                    }
+                                                },
+                                            }}
+                                        />
+                                    );
+                                })
+                            }
+                        </List>
+                        :
+                        <Empty>
+                            Item Options Empty
+                        </Empty>
                 }
             </Area>
         );

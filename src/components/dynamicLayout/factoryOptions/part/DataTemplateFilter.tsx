@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 //utils
-import axiosGuard from '@/utils/axiosGuard';
-import axiosResponseProcessor from '@/utils/axiosResponseProcessor';
+// import axiosGuard from '@/utils/axiosGuard';
+// import axiosResponseProcessor from '@/utils/axiosResponseProcessor';
 //type
 import {
     IMappingValueProps,
@@ -10,9 +10,9 @@ import {
 import {
     IDataFilterRowProps,
 } from '../../popover/filter/DataTemplateFilterRow';
-import {
-    IPrimalDataTypeProps,
-} from '@/components/datatemplate/interface/element.interface';
+// import {
+//     IPrimalDataTypeProps,
+// } from '@/components/datatemplate/interface/element.interface';
 //
 import {
     Button,
@@ -62,21 +62,21 @@ export const DataTemplateFilter: React.FC<IMappingValueProps<any>> = (props) =>
     {
         if(selectValue)
         {
-            axiosGuard.get('/template/keyList')
-                .then((res) => 
-                {
-                    axiosResponseProcessor<ITemplateKeyProps>(res, {
-                        successCallback: (result) => 
-                        {
-                            setAllTempaltekeyData(result);
-                            setCurrentTemplateData(result?.[selectValue]);
-                        },
-                    });
-                })
-                .catch((error) => 
-                {
-                    console.error(error);
-                });
+            // axiosGuard.get('/template/keyList')
+            //     .then((res) => 
+            //     {
+            //         axiosResponseProcessor<ITemplateKeyProps>(res, {
+            //             successCallback: (result) => 
+            //             {
+            //                 setAllTempaltekeyData(result);
+            //                 setCurrentTemplateData(result?.[selectValue]);
+            //             },
+            //         });
+            //     })
+            //     .catch((error) => 
+            //     {
+            //         console.error(error);
+            //     });
         }
     }, [selectValue]);
 

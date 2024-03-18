@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 //utils
-import axiosGuard from '@/utils/axiosGuard';
-import axiosResponseProcessor from '@/utils/axiosResponseProcessor';
+// import axiosGuard from '@/utils/axiosGuard';
+// import axiosResponseProcessor from '@/utils/axiosResponseProcessor';
 //type
 import { IMappingValueProps } from '../PartMapping';
 import {
@@ -35,20 +35,20 @@ export const SelectLayoutTemplate: React.FC<IMappingValueProps<any>> = (props) =
     //update
     useEffect(() => 
     {
-        axiosGuard.get('/admin/layout/list')
-            .then((res) => 
-            {
-                axiosResponseProcessor<ILayoutListDataProps>(res, {
-                    successCallback: (result) => 
-                    {
-                        setTemplateListData(result.data);
-                    },
-                });
-            })
-            .catch((error) => 
-            {
-                console.error(error);
-            });
+        // axiosGuard.get('/admin/layout/list');
+        // .then((res) => 
+        // {
+        //     axiosResponseProcessor<ILayoutListDataProps>(res, {
+        //         successCallback: (result) => 
+        //         {
+        //             setTemplateListData(result.data);
+        //         },
+        //     });
+        // })
+        // .catch((error) => 
+        // {
+        //     console.error(error);
+        // });
     }, []);
     
     return (

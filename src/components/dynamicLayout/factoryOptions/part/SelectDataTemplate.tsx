@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 //utils
-import axiosGuard from '@/utils/axiosGuard';
+// import axiosGuard from '@/utils/axiosGuard';
 import { bindAction } from '../../utils/bindAction';
 //type
 import {
@@ -47,23 +47,23 @@ export const SelectDataTemplate: React.FC<IMappingValueProps<any>> = (props) =>
     //update
     useEffect(() => 
     {
-        axiosGuard.get('template/list')
-            .then((res) => 
-            {
-                const {
-                    code,
-                    data: tdata,
-                } = res.data;
+        // axiosGuard.get('template/list')
+        //     .then((res) => 
+        //     {
+        //         const {
+        //             code,
+        //             data: tdata,
+        //         } = res.data;
 
-                if(code === 1)
-                {
-                    setTemplateListData(tdata.data);
-                }
-            })
-            .catch((error) => 
-            {
-                console.error(error);
-            });
+        //         if(code === 1)
+        //         {
+        //             setTemplateListData(tdata.data);
+        //         }
+        //     })
+        //     .catch((error) => 
+        //     {
+        //         console.error(error);
+        //     });
     }, []);
     
     return (

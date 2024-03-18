@@ -1,12 +1,30 @@
 import React from 'react';
 import { NextPage } from 'next';
 import axios from 'axios';
+import {
+    IContentBridgeKeyProps,
+    ILayoutElementOptionProps,
+} from '@/components/dynamicLayout/interface/element.interface';
 //components
 import DashboardLayout from '@/layouts/DashboardLayout';
 import DYLayout from '@/components/dynamicLayout/DYLayout';
 
-const Home: NextPage = () => 
+interface IHomeProps {
+    ssrExportOption: {
+        options?: ILayoutElementOptionProps[]
+        itemOptions?: ILayoutElementOptionProps[]
+        contentBridgeKey?: IContentBridgeKeyProps
+    };
+}
+
+const Home: NextPage<IHomeProps> = (props) => 
 {
+    const {
+        ssrExportOption,
+    } = props;
+
+    console.log('해당값이 추출되었습니다.', ssrExportOption);
+
     return (
         <DashboardLayout
             type='wide'
@@ -24,7 +42,11 @@ const Home: NextPage = () =>
                     border: '1px solid #d2d2d7',
                 }}
             >
-                <DYLayout/>
+                <DYLayout
+                    defaultOption={ssrExportOption?.options}
+                    defaultItemOption={ssrExportOption?.itemOptions}
+                    defaultBridgeKey={ssrExportOption?.contentBridgeKey}
+                />
             </div>
         </DashboardLayout>
     );
@@ -35,9 +57,11 @@ export const getServerSideProps = async () =>
     try 
     {
         //code export
-        await axios.get('http://localhost:3005/api/exportOption');
+        const res = await axios.get('http://localhost:3005/api/exportOption');
         
-        return { props: {} };
+        return { props: {
+            ssrExportOption: res.data,
+        } };
     }
     catch (error) 
     {

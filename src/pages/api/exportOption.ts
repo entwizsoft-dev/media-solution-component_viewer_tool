@@ -2,23 +2,39 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import process from 'process';
 import path from 'path';
+import axios from 'axios';
 
-const exportHandler = (req: NextApiRequest, res: NextApiResponse) => 
+const exportHandler = async (req: NextApiRequest, res: NextApiResponse) => 
 {
-    if (req.method === 'GET') 
+    try 
     {
-        const root = process.cwd();
-        const exportFilePath = path.join(root, '/src/export/ExportFile.tsx');
-        const file = fs.readFileSync(exportFilePath, 'utf8');
+        if (req.method === 'GET') 
+        {
+            const root = process.cwd();
+            const exportFilePath = path.join(root, '/src/export/ExportFile.tsx');
+            const file = fs.readFileSync(exportFilePath, 'utf8');
+    
+            const exportfileCodeRes = await axios.post('http://localhost:3002/admin/componentPalette/optionList', {code: file});
 
-        console.log(file);
-
-        res.status(200).json({ data: '코드 파일 추출 R&D중' });
+            if(exportfileCodeRes.data.code === 1)
+            {
+                res.status(200).json(exportfileCodeRes.data.data);
+            }
+            else
+            {
+                throw 'api error';
+            }
+        }
+        else 
+        {
+            throw 'method error';
+        }
     }
-    else 
+    catch (error)
     {
+        
         res.setHeader('Allow', ['GET']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
+        res.status(405).end(error);
     }
 };
 

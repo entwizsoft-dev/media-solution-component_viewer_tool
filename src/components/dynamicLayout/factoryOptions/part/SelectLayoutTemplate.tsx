@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { IMappingValueProps } from '../PartMapping';
 import {
     ILayoutDBProps,
-    ILayoutListDataProps,
 } from '../../interface/layout.interface';
 //components
 import {
@@ -35,20 +34,9 @@ export const SelectLayoutTemplate: React.FC<IMappingValueProps<any>> = (props) =
     //update
     useEffect(() => 
     {
-        // axiosGuard.get('/admin/layout/list');
-        // .then((res) => 
-        // {
-        //     axiosResponseProcessor<ILayoutListDataProps>(res, {
-        //         successCallback: (result) => 
-        //         {
-        //             setTemplateListData(result.data);
-        //         },
-        //     });
-        // })
-        // .catch((error) => 
-        // {
-        //     console.error(error);
-        // });
+        setTemplateListData([
+            
+        ]);
     }, []);
     
     return (

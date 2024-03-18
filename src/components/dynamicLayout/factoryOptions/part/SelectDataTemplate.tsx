@@ -47,23 +47,18 @@ export const SelectDataTemplate: React.FC<IMappingValueProps<any>> = (props) =>
     //update
     useEffect(() => 
     {
-        // axiosGuard.get('template/list')
-        //     .then((res) => 
-        //     {
-        //         const {
-        //             code,
-        //             data: tdata,
-        //         } = res.data;
-
-        //         if(code === 1)
-        //         {
-        //             setTemplateListData(tdata.data);
-        //         }
-        //     })
-        //     .catch((error) => 
-        //     {
-        //         console.error(error);
-        //     });
+        setTemplateListData([
+            {
+                _id: 'test',
+                _templateName: 'test',
+                templateType: 'object',
+                createdAt: '9999-99-99',
+                updatedAt: '9999-99-99',
+                templateData: [],
+                templateLabel:'테스트용 템플릿 입니다.',
+                templateOption: {},
+            },
+        ]);
     }, []);
     
     return (

@@ -1,11 +1,17 @@
 //type
-import { ITableBaseDataProps } from '@/interfaces/table.interface';
 import {
     ILayoutElementListCoreProps,
 } from './element.interface';
 import {
     ILayoutCommonElementDataProps,
 } from './commonElement.interface';
+
+export interface ITableBaseDataProps<T extends Record<string, any> = Record<string, any>> {
+    currentPage: number;
+    data: T[];
+    totalCount: number;
+    totalPages: number;
+}
 
 export interface IFocuseIndexPoprs {
     type: 'header' | 'layout' | 'footer' | null;

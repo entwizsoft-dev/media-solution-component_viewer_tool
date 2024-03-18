@@ -3,7 +3,6 @@ import { styled } from '@mui/material/styles';
 //dnd
 import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 //type
-import { IStateProrps } from '@/components/transferList/interface/context.interface';
 import {
     ITemplateKeyGroupProps,
     ITemplateKeyProps,
@@ -28,6 +27,11 @@ import {
     Button,
 } from '@mui/material';
 import RecursiveFilterPopover from './RecursiveFilterPopover';
+
+export interface IStateProrps<T> {
+    state: T;
+    setState: React.Dispatch<React.SetStateAction<T>>;
+}
 //필터 아이템 row
 const ItemRow: React.FC<StackProps> = (props) => 
 {

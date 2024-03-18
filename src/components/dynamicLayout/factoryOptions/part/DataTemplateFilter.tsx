@@ -10,9 +10,9 @@ import {
 import {
     IDataFilterRowProps,
 } from '../../popover/filter/DataTemplateFilterRow';
-// import {
-//     IPrimalDataTypeProps,
-// } from '@/components/datatemplate/interface/element.interface';
+import {
+    IPrimalDataTypeProps,
+} from '@/components/datatemplate/interface/element.interface';
 //
 import {
     Button,
@@ -62,21 +62,8 @@ export const DataTemplateFilter: React.FC<IMappingValueProps<any>> = (props) =>
     {
         if(selectValue)
         {
-            // axiosGuard.get('/template/keyList')
-            //     .then((res) => 
-            //     {
-            //         axiosResponseProcessor<ITemplateKeyProps>(res, {
-            //             successCallback: (result) => 
-            //             {
-            //                 setAllTempaltekeyData(result);
-            //                 setCurrentTemplateData(result?.[selectValue]);
-            //             },
-            //         });
-            //     })
-            //     .catch((error) => 
-            //     {
-            //         console.error(error);
-            //     });
+            setAllTempaltekeyData({});
+            setCurrentTemplateData({});
         }
     }, [selectValue]);
 

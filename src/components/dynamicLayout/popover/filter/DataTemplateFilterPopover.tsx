@@ -8,7 +8,6 @@ import {
     DropResult,
 } from 'react-beautiful-dnd';
 //type
-import { IStateProrps } from '@/components/transferList/interface/context.interface';
 import { IDataFilterRowProps } from './DataTemplateFilterRow';
 import {
     ITemplateKeyGroupProps,
@@ -23,6 +22,11 @@ import {
     Button,
 } from '@mui/material';
 import DataTemplateFilterRow from './DataTemplateFilterRow';
+
+export interface IStateProrps<T> {
+    state: T;
+    setState: React.Dispatch<React.SetStateAction<T>>;
+}
 
 
 //필터 생성 이벤트 타입

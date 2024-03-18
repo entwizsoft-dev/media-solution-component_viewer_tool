@@ -11,7 +11,7 @@ const exportHandler = async (req: NextApiRequest, res: NextApiResponse) =>
         if (req.method === 'GET') 
         {
             const root = process.cwd();
-            const exportFilePath = path.join(root, '/src/export/ExportFile.tsx');
+            const exportFilePath = path.join(root, '/src/export/index.tsx');
             const file = fs.readFileSync(exportFilePath, 'utf8');
     
             const exportfileCodeRes = await axios.post('http://localhost:3002/admin/componentPalette/optionList', {code: file});

@@ -14,7 +14,7 @@ import {
     ILayoutCoreDataObjectProps,
 } from '../interface/layout.interface';
 //components
-import ExportFile from '@/export/ExportFile';
+import ExportFile from '@/export';
 
 interface IStateProrps<T> {
     state: T;

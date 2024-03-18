@@ -2,7 +2,8 @@
 미디어 솔루션 컴포넌트 팔레트를 확인 및 개발 할 수 있는 레포입니다.
 ## 사용법
 1. `yarn`을 설치하고 `yarn dev`명령어를 입력하여 로컬 환경을 실행합니다.
-2. `root` 디렉토리 경로의 `src/export`폴더에 있는 `ExportFile.tsx` 에서 작업을 진행합니다.
-3. `option` 및 `bridgekey`는 선언 후 새로고침을 하면 자동으로 미리보기용으로 추출됩니다.
+2. `root` 디렉토리 경로의 `src/export`폴더에 있는 `index.tsx` 에서 작업을 진행합니다.
+3. index.tsx 에서 export 할 변수의 이름을 지정합니다. 해당 변수명은 export 시 컴포넌트 명입니다.
+4. `option` 및 `bridgekey`는 선언 후 새로고침을 하면 자동으로 미리보기용으로 추출됩니다.
 
-> 절대로 `export` 폴더에 있는 `ExportFile.tsx` 파일을 삭제하지 마세요!
+> 절대로 `export` 폴더에 있는 `index.tsx` 파일을 삭제하지 마세요!

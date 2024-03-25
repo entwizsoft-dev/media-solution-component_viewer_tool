@@ -57,10 +57,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import ErrorIcon from '@mui/icons-material/Error';
+import TitleIcon from '@mui/icons-material/Title';
 
 
 //export
 export const SvgIcons = {
+    TitleIcon,
     QuestionMarkIcon,
     CheckBoxIcon,
     RadioButtonCheckedIcon,

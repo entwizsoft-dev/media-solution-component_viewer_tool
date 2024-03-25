@@ -36,11 +36,15 @@ const DYHeader: React.FC = () =>
                             {
                                 try 
                                 {
-                                    await downloadFile('/api/exportFileDownload');
+                                    if(confirm('파일을 저장하시겠습니까?'))
+                                    {
+                                        await downloadFile('/api/exportFileDownload');
+                                    }
                                 }
                                 catch (error) 
                                 {
-                                    
+                                    console.error(error);
+                                    alert('파일 저장에 실패하였습니다.');
                                 }
                             }}
                         >

@@ -32,7 +32,7 @@ const DYAside = () =>
                     <Title
                         variant='h6'
                     >
-                        Export Options
+                        Options Preview
                     </Title>
                 </Head>
                 <Body>

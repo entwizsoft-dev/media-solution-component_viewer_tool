@@ -7,14 +7,13 @@ import { useDYLayoutContext } from '../DYLayoutContext';
 import {
     IContentBridgeKeyProps,
     ILayoutElementListValueProps,
-    ILayoutTotalElementListProps,
 } from '../interface/element.interface';
 import {
     IFocuseIndexPoprs,
     ILayoutCoreDataObjectProps,
 } from '../interface/layout.interface';
 //components
-import ExportFile from '@/export';
+import ExportFile from './ExportFile';
 
 interface IStateProrps<T> {
     state: T;
@@ -29,26 +28,12 @@ interface IPartComponentsStateProps<T> {
 
 //파트에서 쓰이는 고정 props
 export interface IPartComponentsProps {
-    currentLayoutData: IPartComponentsStateProps<ILayoutCoreDataObjectProps>;
-    currentBridgeKey?: IContentBridgeKeyProps;
-    bindComponentLayoutUpdate: (templateKey?: string) => void;
-    focusIndex: IStateProrps<IFocuseIndexPoprs>;
     focusParent: boolean;
-}
-
-//헤더,푸터 요소 파트에서 쓰이는 고정 props
-export interface ICommonPartComponentsProps {
     focusIndex: IStateProrps<IFocuseIndexPoprs>;
-    currentLayoutData: IPartComponentsStateProps<ILayoutTotalElementListProps | undefined>;
-    bindComponentLayoutUpdate: (templateKey?: string, callback?: (prev: Record<string, any>) => ILayoutElementListValueProps) => void;
+    currentLayoutData: IPartComponentsStateProps<ILayoutCoreDataObjectProps | undefined>;
     currentBridgeKey?: IContentBridgeKeyProps;
-    focusParent?: boolean;
+    bindComponentLayoutUpdate: (templateKey?: string, callback?: (prev: Record<string, any>) => ILayoutElementListValueProps) => void;
 }
-
-// //레이아웃 요소 매핑 타입
-// type IMappingProps = Record<any, React.FC<IPartComponentsProps>>;
-// //공통 레이아웃 요소 매핑 타입
-// type ICommonMappingProps = Record<any, React.FC<ICommonPartComponentsProps>>;
 
 interface IPartMappingProps {
     itemIndex?: number;
@@ -72,7 +57,7 @@ const PartMapping: React.FC<IPartMappingProps> = (props) =>
     };
 
     //연동형 컴포넌트용 데이터 업데이트 이벤트
-    const bindComponentLayoutUpdate = (templateKey?: string) => 
+    const bindComponentLayoutUpdate = (templateKey?: string, callbackUpdate?: (prev: Record<string, any>) => ILayoutElementListValueProps) => 
     {
         if(templateKey)
         {
@@ -86,6 +71,19 @@ const PartMapping: React.FC<IPartMappingProps> = (props) =>
                         ],
                         testText: '테스트 글자',
                         testNumber: 9999,
+                        testBindData: [
+                            {
+                                _id: '65cf1472ade16310a0de204a',
+                                depthTestImage: [
+                                    'https://d21ageesh0dquz.cloudfront.net/images/1708070000758-5575__1699525286073-3036.ddo.png',
+                                ],
+                                depthTestText: '테스트 글자',
+                                depthTestNumber: 9999,
+                                _templateName: 'depthTest',
+                                createdAt: '2024-02-16 16:53:22',
+                                updatedAt: '2024-02-16 16:53:22',
+                            },
+                        ],
                         _templateName: 'test',
                         createdAt: '2024-02-16 16:53:22',
                         updatedAt: '2024-02-16 16:53:22',
@@ -102,7 +100,18 @@ const PartMapping: React.FC<IPartMappingProps> = (props) =>
 
                     return a;
                 }, [] as ILayoutElementListValueProps[]);
-                return {...prev, contents: convres};
+
+                if(typeof callbackUpdate === 'function')
+                {
+                    // const conv = {...convres[0], ...callbackUpdate(testRes)};
+                    // convres = conv;
+                    // return {...prev, contents: [...convres]};
+                    return {...prev};
+                }
+                else
+                {
+                    return {...prev, contents: convres};
+                }
             };
 
             currentLayoutUpdate(callback(currentLayoutData.state));

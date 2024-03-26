@@ -59,10 +59,12 @@ import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import ErrorIcon from '@mui/icons-material/Error';
 import TitleIcon from '@mui/icons-material/Title';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DownloadIcon from '@mui/icons-material/Download';
 
 
 //export
 export const SvgIcons = {
+    DownloadIcon,
     ContentCopyIcon,
     TitleIcon,
     QuestionMarkIcon,

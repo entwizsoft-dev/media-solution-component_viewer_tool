@@ -18,6 +18,7 @@ import MappingIcon from '@/components/MappingIcon';
 const DYHeader: React.FC = () => 
 {
     const [imageUploadEl, setImageUploadEl] = React.useState<HTMLButtonElement | null>(null);
+    const [viewUrl, setViewUrl] = React.useState<string | null>(null);
     const [uploadUrl, setUploadUrl] = React.useState<string | null>(null);
 
     return (
@@ -102,6 +103,8 @@ const DYHeader: React.FC = () =>
                             onClick={() => 
                             {
                                 setImageUploadEl(null);
+                                setUploadUrl(null);
+                                setViewUrl(null);
                             }}
                         >
                             <MappingIcon
@@ -119,10 +122,13 @@ const DYHeader: React.FC = () =>
                             {
                                 const url = await imageFileUploadHandler(files[0]);
                                 setUploadUrl(url);
+                                setViewUrl(url.split('https://d21ageesh0dquz.cloudfront.net/images/')?.[1] || '알 수 없는 이미지.jpg');
                             }
                             catch (error) 
                             {
                                 console.error(error);
+                                setUploadUrl(null);
+                                setViewUrl(null);
                                 alert('이미지 업로드에 실패하였습니다.');
                             }
                         }}
@@ -144,7 +150,7 @@ const DYHeader: React.FC = () =>
                                         textOverflow: 'ellipsis',
                                     }}
                                 >
-                                    {uploadUrl}
+                                    {viewUrl}
                                 </Typography>
                                 <IconButton
                                     onClick={async () => 
